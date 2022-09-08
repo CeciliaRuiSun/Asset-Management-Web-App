@@ -15,7 +15,7 @@ api = Api(app)
 jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Item, '/item', endpoint='item')
-api.add_resource(Quantity, '/item/<string:content>/<int:qty>')
+api.add_resource(Quantity, '/qty', endpoint='qty')
 
 if __name__ == '__main__':
     app.run(debug=True)  # important to mention debug=True

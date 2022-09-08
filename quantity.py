@@ -1,19 +1,19 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 
-from item import items
+from data import items
+from marshmallow import Schema, fields
+class QtyQuerySchema(Schema):
+    category = fields.Str()
+    name = fields.Str(required=True)
+    quantity = fields.Int()
+    owner = fields.Str()
 
-
+schema = QtyQuerySchema()
 class Quantity(Resource):
-    def get(self, content, qty):
+    def get(self):
         args = request.args
-        print(args)  # For debugging
-
-        if content == "item_qty_biggerthan":
-            return {'item': list(filter(lambda x: x['quantity'] > qty, items))}
-        elif content == "item_qty_lessthan":
-            return {'item': list(filter(lambda x: x['quantity'] < qty, items))}
-        elif content == "item_qty_equalto":
-            return {'item': list((filter(lambda x: x['quantity'] == qty, items)))}
-        else:
-            return "Please put in a valid link. "
+        start = args['start']
+        end = args['end']
+        #print(type(args['start']))
+        return {'item': list((filter(lambda x: x['quantity'] >= int(start) and x['quantity'] <= int(end), items)))}

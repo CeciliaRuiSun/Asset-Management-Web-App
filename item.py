@@ -3,19 +3,15 @@ from flask import Flask, request, abort
 from flask_restful import Resource, Api
 from flask_jwt import JWT, jwt_required, current_identity
 from marshmallow import Schema, fields
+from data import items
 
-items = [{'category': 'O1', 'name': 'T1', 'quantity': 2, 'owner': 'Joe'}, {'category': 'O2', 'name': 'T2', 'quantity': 10, 'owner': 'Mike'},
-         {'category': 'O3', 'name': 'T3', 'quantity': 8, 'owner': 'Joe'}, {'category': 'O4', 'name': 'T4', 'quantity': 6, 'owner': 'Joe'},
-         {'category': 'O5', 'name': 'T5', 'quantity': 2, 'owner': 'Mike'}]
-
-
-class BarQuerySchema(Schema):
+class ItemQuerySchema(Schema):
     category = fields.Str()
     name = fields.Str(required=True)
     quantity = fields.Int()
     owner = fields.Str()
 
-schema = BarQuerySchema()
+schema = ItemQuerySchema()
 
 class Item(Resource):
 
