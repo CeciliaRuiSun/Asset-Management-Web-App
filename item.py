@@ -34,12 +34,12 @@ class Item(Resource):
         if next(filter(lambda x: x['name'] == name, items), None) is not None:
             return {'message': "An item with name '{}' already exists.".format(name)}
 
-        category = args['category']
-        quantity = args['quantity']
+        category = args.get('category',None)
+        quantity = args.get('quantity',None)
 
         item = {'name': name, 'quantity': quantity, 'category': category}
         items.append(item)
-        return item
+        return {'item': next(filter(lambda x: x['name'] == name, items), None)}
 
     @jwt_required()
     def delete(self):
