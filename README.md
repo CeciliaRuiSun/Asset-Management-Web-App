@@ -1,1 +1,1 @@
-# python-inventory-mgmt-web-app
+# python-asset-mgmt-web-app
