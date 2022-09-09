@@ -8,6 +8,7 @@ from data import items
 class ItemQuerySchema(Schema):
     category = fields.Str()
     name = fields.Str(required=True)
+    employee_id = fields.Str()
     quantity = fields.Int()
     owner = fields.Str()
 
@@ -33,8 +34,9 @@ class Item(Resource):
         category = args.get('category',None)
         quantity = args.get('quantity',None)
         owner = args.get('owner', None)
+        employee_id = args.get('employee_id', None)
 
-        item = {'name': name, 'quantity': quantity, 'category': category, 'owner': owner}
+        item = {'name': name, 'quantity': quantity, 'category': category, 'owner': owner, 'employee_id': employee_id}
         items.append(item)
         return {'item': next(filter(lambda x: x['name'] == name, items), None)}
 
@@ -53,11 +55,12 @@ class Item(Resource):
         category = args.get('category', None)
         quantity = args.get('quantity', None)
         owner = args.get('owner', None)
+        employee_id = args.get('employee_id', None)
 
         # Once again, print something not in the args to verify everything works
         item = next(filter(lambda x: x['name'] == name, items), None)
         if item is None:
-            item = {'name': name, 'quantity': quantity, 'category': category, 'owner': owner}
+            item = {'name': name, 'quantity': quantity, 'category': category, 'owner': owner, 'employee_id': employee_id}
             items.append(item)
         else:
             item['quantity'] = quantity

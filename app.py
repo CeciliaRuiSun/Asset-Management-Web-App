@@ -4,6 +4,7 @@ from flask_jwt import JWT, jwt_required, current_identity
 
 from item import Item
 from quantity import Quantity
+from department import Dept
 from security import authenticate, identity
 
 app = Flask(__name__)
@@ -16,6 +17,7 @@ jwt = JWT(app, authenticate, identity)
 
 api.add_resource(Item, '/item', endpoint='item')
 api.add_resource(Quantity, '/qty', endpoint='qty')
+api.add_resource(Dept, '/dept', endpoint='dept')
 
 if __name__ == '__main__':
     app.run(debug=True)  # important to mention debug=True

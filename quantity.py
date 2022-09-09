@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, abort
 from flask_restful import Resource, Api
 
 from data import items
@@ -12,8 +12,11 @@ class QtyQuerySchema(Schema):
 schema = QtyQuerySchema()
 class Quantity(Resource):
     def get(self):
+        errors = schema.validate(request.args)
+        if errors:
+            abort(400, str(errors))
         args = request.args
         start = args['start']
         end = args['end']
-        #print(type(args['start']))
+
         return {'item': list((filter(lambda x: x['quantity'] >= int(start) and x['quantity'] <= int(end), items)))}
