@@ -20,7 +20,7 @@ api.add_resource(Quantity, '/qty', endpoint='qty')
 api.add_resource(Dept, '/dept', endpoint='dept')
 
 if __name__ == '__main__':
-    app.run(debug=True)  # important to mention debug=True
+    app.run(debug=True, port=5002)  # important to mention debug=True
 
 
 
