@@ -4,6 +4,7 @@ from flask_restful import Resource, Api
 from data import items, person
 from marshmallow import Schema, fields
 
+# http://54.193.89.191:8888/dept?department=HR
 class DeptQuerySchema(Schema):
     category = fields.Str()
     name = fields.Str()
